@@ -6,7 +6,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import com.autoever.rightnow.R
-class MyFragment : Fragment() {
+class FindFragment : Fragment() {
 
     override fun onCreateView(
         inflater: LayoutInflater,
