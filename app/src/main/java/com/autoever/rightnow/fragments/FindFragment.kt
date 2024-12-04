@@ -38,6 +38,7 @@ class FindFragment : Fragment() {
     }
 
     fun getCars() {
+        cars.clear()
         firestore.collection("cars")
             .get() // get() 메서드를 사용하여 데이터를 가져옴
             .addOnSuccessListener { result ->
