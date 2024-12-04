@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layer-list xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <!-- 그림자 레이어 -->
+    <item>
+        <shape android:shape="rectangle">
+            <!-- 그림자 색상 -->
+            <solid android:color="#80000000" /> <!-- 투명한 검정색 (#80은 투명도 50%) -->
+
+            <!-- 그림자 크기 -->
+            <corners android:radius="16dp" />
+
+            <!-- 그림자 위치 -->
+            <padding
+                android:left="2dp"
+                android:top="2dp"
+                android:right="2dp"
+                android:bottom="2dp" />
+        </shape>
+    </item>
+
+    <!-- 실제 배경 레이어 -->
+    <item>
+        <shape android:shape="rectangle">
+            <!-- 배경 색상 -->
+            <solid android:color="#01AF56" />
+
+            <!-- 모서리 둥글기 -->
+            <corners android:radius="8dp" />
+        </shape>
+    </item>
+</layer-list>
