@@ -13,7 +13,7 @@ class MyFragment : Fragment() {
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        val view = inflater.inflate(R.layout.fragment_find, container, false)
+        val view = inflater.inflate(R.layout.fragment_my, container, false)
 
         return view
     }
