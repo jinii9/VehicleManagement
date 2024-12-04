@@ -49,7 +49,31 @@ class SignupActivity : AppCompatActivity() {
 
         btnComplete.setOnClickListener {
 
-            val selectedAge = spinner.selectedItem.toString().toInt()
+            val email = editTextEmail.text.toString().trim() // 이메일 공백 제거
+            val password = editTextPassword.text.toString().trim()
+            val confirmPassword = editTextPassword2.text.toString().trim()
+
+            // 입력값 검증
+            if (email.isEmpty()) {
+                Toast.makeText(this, "이메일을 입력해주세요.", Toast.LENGTH_SHORT).show()
+                return@setOnClickListener
+            }
+
+            if (password.isEmpty() || confirmPassword.isEmpty()) {
+                Toast.makeText(this, "비밀번호를 입력해주세요.", Toast.LENGTH_SHORT).show()
+                return@setOnClickListener
+            }
+
+            if (password != confirmPassword) {
+                Toast.makeText(this, "비밀번호가 일치하지 않습니다.", Toast.LENGTH_SHORT).show()
+                return@setOnClickListener
+            }
+
+            val selectedAge = spinner.selectedItem.toString().toIntOrNull()
+            if (selectedAge == null) {
+                Toast.makeText(this, "올바른 나이를 선택해주세요.", Toast.LENGTH_SHORT).show()
+                return@setOnClickListener
+            }
 
             val user = User(
                 "",
@@ -58,16 +82,18 @@ class SignupActivity : AppCompatActivity() {
             )
 
             Log.d("유저 정보: ", user.toString())
-            if (editTextPassword.text == editTextPassword2.text){
+            if (editTextPassword.text.toString() == editTextPassword2.text.toString()){
                 signUp(user,editTextPassword.text.toString())
             }
         }
     }
     fun signUp(user: User, password: String) {
         val auth = FirebaseAuth.getInstance()
+        Log.d("이런", "여기까진")
         auth.createUserWithEmailAndPassword(user.email, password)
             .addOnCompleteListener(this) { task ->
                 if (task.isSuccessful) {
+                    Log.d("하하하", "성공했나?")
                     // 회원가입 성공
                     val userId = auth.currentUser?.uid
                     if (userId != null) {
@@ -79,6 +105,7 @@ class SignupActivity : AppCompatActivity() {
 
                 } else {
                     // 에러 처리
+                    Log.d("이런", "실패했다..")
                     Toast.makeText(this, task.exception?.message, Toast.LENGTH_LONG).show()
                 }
             }

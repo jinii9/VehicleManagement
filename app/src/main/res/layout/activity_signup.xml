@@ -29,7 +29,7 @@
         android:layout_height="64dp"
         android:layout_marginStart="32dp"
         android:gravity="center_vertical"
-        android:text="로그인"
+        android:text="회원가입"
         android:textColor="#334155"
         android:textSize="22sp"
         android:textStyle="bold" />
