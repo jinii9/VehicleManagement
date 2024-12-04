@@ -16,7 +16,6 @@ import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.autoever.rightnow.R
-import com.bumptech.glide.Glide
 class ChatFragment : Fragment() {
 
     override fun onCreateView(
