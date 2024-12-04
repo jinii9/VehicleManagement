@@ -29,7 +29,7 @@
         android:layout_height="64dp"
         android:layout_marginStart="32dp"
         android:gravity="center_vertical"
-        android:text="로그인"
+        android:text="회원가입"
         android:textColor="#334155"
         android:textSize="22sp"
         android:textStyle="bold" />
@@ -78,8 +78,8 @@
                 android:id="@+id/textViewPassword"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="비밀번호"
                 android:layout_marginTop="16dp"
+                android:text="비밀번호"
                 android:textColor="#334155" />
 
             <EditText
@@ -96,6 +96,58 @@
                 android:textColor="#334155" />
         </LinearLayout>
 
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:layout_marginEnd="16dp"
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/textViewPassword2"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:text="비밀번호 확인"
+                android:textColor="#334155" />
+
+            <EditText
+                android:id="@+id/editTextPassword2"
+                android:layout_width="match_parent"
+                android:layout_height="40dp"
+                android:layout_marginTop="8dp"
+                android:background="@drawable/input"
+                android:ems="10"
+                android:hint="*********"
+                android:inputType="text"
+                android:paddingStart="8dp"
+                android:paddingEnd="8dp"
+                android:textColor="#334155" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:layout_marginEnd="16dp"
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/textViewAge"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:text="나이"
+                android:textColor="#334155" />
+
+            <Spinner
+                android:id="@+id/spinner"
+                android:layout_marginTop="8dp"
+                android:layout_width="match_parent"
+                android:layout_height="40dp"
+                android:background="@drawable/input" />
+        </LinearLayout>
+
         <Space
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -107,30 +159,18 @@
             android:orientation="vertical">
 
             <TextView
-                android:id="@+id/btnLogin"
+                android:id="@+id/btnComplete"
                 android:layout_width="match_parent"
-                android:layout_height="40dp"
+                android:layout_height="48dp"
                 android:layout_marginStart="16dp"
                 android:layout_marginEnd="16dp"
                 android:layout_marginBottom="16dp"
                 android:background="@drawable/primary_button"
-                android:gravity="center"
-                android:text="로그인"
                 android:elevation="4dp"
+                android:gravity="center"
+                android:text="가입 완료"
                 android:textColor="#FFFFFF" />
 
-            <TextView
-                android:id="@+id/btnSignup"
-                android:layout_width="match_parent"
-                android:layout_height="40dp"
-                android:layout_marginStart="16dp"
-                android:layout_marginEnd="16dp"
-                android:layout_marginBottom="16dp"
-                android:background="@drawable/secondary_button"
-                android:gravity="center"
-                android:elevation="4dp"
-                android:text="회원가입"
-                android:textColor="#020202" />
         </LinearLayout>
 
     </LinearLayout>
