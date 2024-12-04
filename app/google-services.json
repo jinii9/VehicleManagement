@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "307479470684",
+    "project_id": "rightnow-6f01f",
+    "storage_bucket": "rightnow-6f01f.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:307479470684:android:a964b346b187fc7d63bc99",
+        "android_client_info": {
+          "package_name": "com.autoever.rightnow"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDwnB4PbNTgbAZm2kTjlY-IQ_SrMGnphLQ"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
