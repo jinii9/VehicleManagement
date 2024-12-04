@@ -14,7 +14,7 @@
         android:id="@+id/controlFragment"
         android:name="com.autoever.rightnow.fragments.ControlFragment"
         android:label="리모콘"
-        tools:layout="@layout/fragment_add" />
+        tools:layout="@layout/fragment_control" />
 
     <fragment
         android:id="@+id/addFragment"
