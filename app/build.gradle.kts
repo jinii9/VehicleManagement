@@ -1,6 +1,7 @@
 plugins {
     alias(libs.plugins.android.application)
     alias(libs.plugins.kotlin.android)
+    id("com.google.gms.google-services")
 }
 
 android {
@@ -45,4 +46,8 @@ dependencies {
     testImplementation(libs.junit)
     androidTestImplementation(libs.androidx.junit)
     androidTestImplementation(libs.androidx.espresso.core)
+
+    // 파이어 베이스
+    implementation("com.google.firebase:firebase-storage-ktx:21.0.1")
+    implementation(platform("com.google.firebase:firebase-bom:33.6.0"))
 }
