@@ -7,6 +7,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.FrameLayout
 import android.widget.ImageView
+import android.widget.LinearLayout
 import android.widget.TextView
 import android.widget.Toast
 import androidx.fragment.app.Fragment
@@ -37,6 +38,8 @@ class ControlFragment : Fragment() {
         val btnMinus = view.findViewById<FrameLayout>(R.id.btnMinus)
         val btnPlus = view.findViewById<FrameLayout>(R.id.btnPlus)
         tempTextView = view.findViewById(R.id.textViewTemp)
+        val btnOff = view.findViewById<TextView>(R.id.btnOff)
+        val temperatureLayout = view.findViewById<LinearLayout>(R.id.temperatureLayout)
 
 
         // 현재 로그인된 사용자의 차량 ID
@@ -55,6 +58,13 @@ class ControlFragment : Fragment() {
             .addOnSuccessListener { document ->
                 currentTemp = document.getDouble("temperature") ?: 27.0
                 updateTemperatureDisplay()
+            }
+        // 초기 공조 상태 확인 및 UI 업데이트
+        firestore.collection("remoteControl").document(carId)
+            .get()
+            .addOnSuccessListener { document ->
+                val acState = document.getBoolean("ac") ?: true
+                updateAcUI(btnOff, temperatureLayout, acState)
             }
 
         // 온도 내리기 버튼
@@ -120,6 +130,31 @@ class ControlFragment : Fragment() {
                 }
         }
 
+
+        // 끄기/켜기 버튼 동작
+        btnOff.setOnClickListener {
+            firestore.collection("remoteControl").document(carId)
+                .get()
+                .addOnSuccessListener { document ->
+                    val currentAcState = document.getBoolean("temperaturePower") ?: true
+                    val newAcState = !currentAcState
+
+                    firestore.collection("remoteControl").document(carId)
+                        .update("temperaturePower", newAcState)
+                        .addOnSuccessListener {
+                            updateAcUI(btnOff, temperatureLayout, newAcState)
+                            if (newAcState) {
+                                showToast("공조가 켜졌습니다")
+                            } else {
+                                showToast("공조가 꺼졌습니다")
+                            }
+                        }
+                        .addOnFailureListener { e ->
+                            showToast("상태 변경 실패: ${e.message}")
+                        }
+                }
+        }
+
         return view
     }
 
@@ -151,7 +186,23 @@ class ControlFragment : Fragment() {
         tempTextView.text = String.format("%.1f°", currentTemp)
     }
 
+    private fun updateAcUI(button: TextView, tempLayout: LinearLayout, isOn: Boolean) {
+        if (isOn) {
+            button.setBackgroundResource(R.drawable.primary_button)
+            button.text = "끄기"
+            button.setTextColor(Color.WHITE)
+            tempLayout.visibility = View.VISIBLE
+        } else {
+            button.setBackgroundResource(R.drawable.secondary_button)
+            button.text = "켜기"
+            button.setTextColor(Color.BLACK)
+            tempLayout.visibility = View.GONE
+        }
+    }
+
     private fun showToast(message: String) {
         Toast.makeText(context, message, Toast.LENGTH_SHORT).show()
     }
+
+
 }
