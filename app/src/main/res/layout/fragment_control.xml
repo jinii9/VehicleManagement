@@ -67,9 +67,10 @@
                         android:id="@+id/btnPower"
                         android:layout_width="60dp"
                         android:layout_height="60dp"
-                        android:background="@drawable/rounded_gray"
+                        android:background="@drawable/rounded_green"
                         android:padding="19dp"
-                        app:srcCompat="@drawable/ic_power" />
+                        app:srcCompat="@drawable/ic_power"
+                        app:tint="@color/white" />
 
                     <ImageView
                         android:id="@+id/btnUnlock"
@@ -150,7 +151,7 @@
                     </FrameLayout>
 
                     <TextView
-                        android:id="@+id/textView4"
+                        android:id="@+id/textViewTemp"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
