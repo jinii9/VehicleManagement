@@ -82,6 +82,12 @@ dependencies {
     implementation("androidx.navigation:navigation-fragment-ktx:2.8.3")
     implementation("androidx.navigation:navigation-ui-ktx:2.8.3")
 
+
+    // Pie Chart
+    implementation("com.github.PhilJay:MPAndroidChart:v3.1.0")
+
+}
+
     // 카카오 지도
     implementation ("com.kakao.maps.open:android:2.9.5")
 
