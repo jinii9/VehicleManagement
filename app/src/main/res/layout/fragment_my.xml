@@ -195,7 +195,7 @@
                 android:padding="16dp">
 
                 <TextView
-                    android:id="@+id/textView110"
+                    android:id="@+id/textView1101"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
