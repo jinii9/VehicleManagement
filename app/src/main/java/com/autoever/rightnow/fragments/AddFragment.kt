@@ -8,6 +8,7 @@ import android.widget.Button
 import android.widget.EditText
 import android.widget.Toast
 import androidx.fragment.app.Fragment
+import androidx.navigation.fragment.findNavController
 import com.autoever.rightnow.R
 import com.autoever.rightnow.models.Car
 import com.google.firebase.firestore.FirebaseFirestore
@@ -23,7 +24,14 @@ class AddFragment : Fragment() {
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        val view = inflater.inflate(R.layout.fragment_register_car1, container, false)
+        val view = inflater.inflate(R.layout.fragment_add, container, false)
+
+
+        val registerCarButton = view.findViewById<Button>(R.id.registerCarButton)
+        registerCarButton.setOnClickListener {
+            findNavController().navigate(R.id.action_fragment_add_to_fragment_register_car1)
+        }
+
 
 //        editTextName = view.findViewById(R.id.editTextName)
 //        button = view.findViewById(R.id.button)
