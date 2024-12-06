@@ -133,11 +133,14 @@
             android:orientation="horizontal">
 
             <LinearLayout
+                android:id="@+id/pie_chart_container"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:background="@drawable/rounded_corner_shadow"
                 android:orientation="vertical"
-                android:padding="16dp">
+                android:padding="16dp"
+                android:clickable="true"
+                android:focusable="true">
 
                 <TextView
                     android:id="@+id/textView11"

@@ -21,6 +21,10 @@ import com.github.mikephil.charting.data.BarEntry
 import com.github.mikephil.charting.components.XAxis
 import com.github.mikephil.charting.formatter.IndexAxisValueFormatter
 import com.github.mikephil.charting.formatter.ValueFormatter
+import android.app.AlertDialog
+import android.widget.ImageView
+import android.widget.LinearLayout
+
 
 class MyFragment : Fragment() {
 
@@ -39,6 +43,11 @@ class MyFragment : Fragment() {
         
         setupPieChart()
         setupBarChart()
+
+        // 차트 컨테이너에 클릭 리스너 설정
+        view.findViewById<LinearLayout>(R.id.pie_chart_container).setOnClickListener {
+            showPieChartDialog()
+        }
 
         return view
     }
@@ -120,7 +129,7 @@ class MyFragment : Fragment() {
             valueTextSize = 12f
             valueFormatter = object : ValueFormatter() {
                 override fun getFormattedValue(value: Float): String {
-                    return "${value.toInt()}"  // 단순히 숫자만 표시
+                    return "${value.toInt()}"  // 숫자만 표시
                 }
             }
         }
@@ -144,7 +153,7 @@ class MyFragment : Fragment() {
             axisLeft.apply {
                 axisMinimum = 0f
                 setDrawGridLines(true)
-                valueFormatter = object : ValueFormatter() {  // 값 포맷 지정 (예: 1000 -> 1,000원)
+                valueFormatter = object : ValueFormatter() {
                     override fun getFormattedValue(value: Float): String {
                         return "${value.toInt()}만원"
                     }
@@ -155,5 +164,41 @@ class MyFragment : Fragment() {
             axisRight.isEnabled = false
         }
     }
-    
+
+    /**
+     * 팝업
+     * */
+    private fun showPieChartDialog() {
+        val dialogBuilder = AlertDialog.Builder(requireContext())
+        val inflater = this.layoutInflater
+        val dialogView = inflater.inflate(R.layout.dialog_chart, null)
+
+        // 새로운 차트 생성 및 설정 복사
+        val dialogPieChart = PieChart(requireContext())
+        dialogPieChart.layoutParams = LinearLayout.LayoutParams(
+            ViewGroup.LayoutParams.MATCH_PARENT,
+            ViewGroup.LayoutParams.MATCH_PARENT
+        )
+
+        // 원본 차트의 데이터와 설정을 복사
+        dialogPieChart.data = pieChart.data
+        dialogPieChart.description = pieChart.description
+        dialogPieChart.isRotationEnabled = pieChart.isRotationEnabled
+        dialogPieChart.centerText = pieChart.centerText
+        dialogPieChart.setDrawEntryLabels(false)
+
+        // 다이얼로그의 컨테이너에 새 차트 추가
+        val chartContainer = dialogView.findViewById<LinearLayout>(R.id.chart_container)
+        chartContainer.addView(dialogPieChart)
+
+        dialogBuilder.setView(dialogView)
+        val dialog = dialogBuilder.create()
+
+        // X 버튼 클릭 리스너
+        dialogView.findViewById<ImageView>(R.id.btn_close).setOnClickListener {
+            dialog.dismiss()
+        }
+
+        dialog.show()
+    }
 }
