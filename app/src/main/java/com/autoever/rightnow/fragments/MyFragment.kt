@@ -48,6 +48,10 @@ class MyFragment : Fragment() {
         view.findViewById<LinearLayout>(R.id.pie_chart_container).setOnClickListener {
             showPieChartDialog()
         }
+        view.findViewById<LinearLayout>(R.id.bar_chart_container).setOnClickListener {
+            showBarChartDialog()
+        }
+
 
         return view
     }
@@ -190,6 +194,55 @@ class MyFragment : Fragment() {
         // 다이얼로그의 컨테이너에 새 차트 추가
         val chartContainer = dialogView.findViewById<LinearLayout>(R.id.chart_container)
         chartContainer.addView(dialogPieChart)
+
+        dialogBuilder.setView(dialogView)
+        val dialog = dialogBuilder.create()
+
+        // X 버튼 클릭 리스너
+        dialogView.findViewById<ImageView>(R.id.btn_close).setOnClickListener {
+            dialog.dismiss()
+        }
+
+        dialog.show()
+    }
+
+    private fun showBarChartDialog() {
+        val dialogBuilder = AlertDialog.Builder(requireContext())
+        val inflater = this.layoutInflater
+        val dialogView = inflater.inflate(R.layout.dialog_chart, null)
+
+        // 새로운 차트 생성 및 설정 복사
+        val dialogBarChart = BarChart(requireContext())
+        dialogBarChart.layoutParams = LinearLayout.LayoutParams(
+            ViewGroup.LayoutParams.MATCH_PARENT,
+            ViewGroup.LayoutParams.MATCH_PARENT
+        )
+
+        // 원본 차트의 데이터와 설정을 복사
+        dialogBarChart.data = barChart.data
+        dialogBarChart.description = barChart.description
+        dialogBarChart.xAxis.apply {
+            position = XAxis.XAxisPosition.BOTTOM
+            setDrawGridLines(false)
+            valueFormatter = IndexAxisValueFormatter(arrayOf("6", "12", "15", "18", "21", "24"))
+            granularity = 1f
+        }
+
+        // Y축 설정 복사
+        dialogBarChart.axisLeft.apply {
+            axisMinimum = 0f
+            setDrawGridLines(true)
+            valueFormatter = object : ValueFormatter() {
+                override fun getFormattedValue(value: Float): String {
+                    return "${value.toInt()}만원"
+                }
+            }
+        }
+        dialogBarChart.axisRight.isEnabled = false
+
+        // 다이얼로그의 컨테이너에 새 차트 추가
+        val chartContainer = dialogView.findViewById<LinearLayout>(R.id.chart_container)
+        chartContainer.addView(dialogBarChart)
 
         dialogBuilder.setView(dialogView)
         val dialog = dialogBuilder.create()
