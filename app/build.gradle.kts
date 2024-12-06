@@ -91,3 +91,6 @@ dependencies {
 
 
 }
+    // number picker
+    implementation ("com.github.travijuu:numberpicker:1.0.7")
+}
