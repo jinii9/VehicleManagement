@@ -32,36 +32,6 @@ class AddFragment : Fragment() {
             findNavController().navigate(R.id.action_fragment_add_to_fragment_register_car1)
         }
 
-
-//        editTextName = view.findViewById(R.id.editTextName)
-//        button = view.findViewById(R.id.button)
-//        button.setOnClickListener {
-//            addCar()
-//        }
-
         return view
-    }
-
-    fun addCar() {
-        val carName = editTextName.text.toString()
-        if (carName.isNotEmpty()) {
-            val car = Car(carType = carName)
-
-            firestore.collection("cars")
-                .add(car)
-                .addOnSuccessListener {
-                    Toast.makeText(context, "차량이 등록되었습니다.", Toast.LENGTH_SHORT).show()
-                    initInputs()
-                }
-                .addOnFailureListener { e ->
-                    Toast.makeText(context, "차량 등록이 실패하였습니다.", Toast.LENGTH_SHORT).show()
-                }
-        } else {
-            Toast.makeText(context, "차량 별칭을 입력해주세요.", Toast.LENGTH_SHORT).show()
-        }
-    }
-
-    fun initInputs() {
-        editTextName.setText("")
     }
 }

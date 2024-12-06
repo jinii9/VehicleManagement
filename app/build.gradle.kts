@@ -24,7 +24,6 @@ android {
 
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
         //추가
-        buildConfigField("String", "KAKAO_MAP_KEY", properties.getProperty("KAKAO_MAP_KEY"))
         buildConfigField("String", "NAVER_MAP_KEY", properties.getProperty("NAVER_MAP_KEY"))
         ndk {
             abiFilters.add("arm64-v8a")
@@ -86,6 +85,7 @@ dependencies {
 
     // Pie Chart
     implementation("com.github.PhilJay:MPAndroidChart:v3.1.0")
+
 
     // 카카오 지도
     implementation ("com.kakao.maps.open:android:2.9.5")

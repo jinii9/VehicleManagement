@@ -118,6 +118,7 @@ class FindFragment : Fragment() {
         marker.map = naverMap
 //        marker.captionText = car.carType // 마커 위에 이름 표시
 
+
         marker.setOnClickListener {
             val intent = Intent(requireContext(), CarDetailActivity::class.java).apply {
                 putExtra("car", car) // Car 객체 전달

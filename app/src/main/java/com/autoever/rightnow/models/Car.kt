@@ -15,3 +15,4 @@ data class Car(
     val pricePerHour: Long = 0,
     val year: Int = 0
 ) : Serializable
+
