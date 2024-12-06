@@ -192,7 +192,6 @@ class MyFragment : Fragment() {
             add(Entry(11f, 45f))  // 7일
             add(Entry(12f, 45f))  // 7일
             add(Entry(13f, 45f))  // 7일
-
         }
 
         val lineDataSet = LineDataSet(entries, "일별 수익").apply {
