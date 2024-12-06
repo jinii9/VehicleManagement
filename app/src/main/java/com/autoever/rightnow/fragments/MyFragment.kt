@@ -11,10 +11,8 @@ import com.github.mikephil.charting.animation.Easing
 import com.github.mikephil.charting.data.PieData
 import com.github.mikephil.charting.data.PieDataSet
 import com.github.mikephil.charting.data.PieEntry
-import com.github.mikephil.charting.utils.ColorTemplate
 import android.graphics.Color
 import com.github.mikephil.charting.charts.BarChart
-import com.github.mikephil.charting.components.Legend
 import com.github.mikephil.charting.data.BarData
 import com.github.mikephil.charting.data.BarDataSet
 import com.github.mikephil.charting.data.BarEntry
@@ -24,12 +22,16 @@ import com.github.mikephil.charting.formatter.ValueFormatter
 import android.app.AlertDialog
 import android.widget.ImageView
 import android.widget.LinearLayout
-
+import com.github.mikephil.charting.charts.LineChart
+import com.github.mikephil.charting.data.Entry
+import com.github.mikephil.charting.data.LineData
+import com.github.mikephil.charting.data.LineDataSet
 
 class MyFragment : Fragment() {
 
     private lateinit var pieChart: PieChart
     private lateinit var barChart: BarChart
+    private lateinit var lineChart: LineChart
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -40,9 +42,11 @@ class MyFragment : Fragment() {
 
         pieChart = view.findViewById(R.id.pie_chart)
         barChart = view.findViewById(R.id.bar_chart)
+        lineChart = view.findViewById(R.id.line_chart)
         
         setupPieChart()
         setupBarChart()
+        setupLineChart()
 
         // 차트 컨테이너에 클릭 리스너 설정
         view.findViewById<LinearLayout>(R.id.pie_chart_container).setOnClickListener {
@@ -166,6 +170,75 @@ class MyFragment : Fragment() {
 
             // 오른쪽 Y축 비활성화
             axisRight.isEnabled = false
+        }
+    }
+
+    /**
+     * 라인 차트 : 일별 수익 추이
+     * */
+    private fun setupLineChart() {
+        // 데이터 생성
+        val entries = ArrayList<Entry>().apply {
+            add(Entry(0f, 30f))  // 1일
+            add(Entry(1f, 45f))  // 2일
+            add(Entry(2f, 35f))  // 3일
+            add(Entry(3f, 60f))  // 4일
+            add(Entry(4f, 50f))  // 5일
+            add(Entry(5f, 70f))  // 6일
+            add(Entry(7f, 45f))  // 7일
+            add(Entry(8f, 45f))  // 7일
+            add(Entry(9f, 45f))  // 7일
+            add(Entry(10f, 45f))  // 7일
+            add(Entry(11f, 45f))  // 7일
+            add(Entry(12f, 45f))  // 7일
+            add(Entry(13f, 45f))  // 7일
+
+        }
+
+        val lineDataSet = LineDataSet(entries, "일별 수익").apply {
+            color = resources.getColor(R.color.color1, null)
+            valueTextColor = Color.BLACK
+            valueTextSize = 12f
+            setDrawFilled(true)
+            fillColor = resources.getColor(R.color.color1, null)
+            fillAlpha = 30
+            valueFormatter = object : ValueFormatter() {
+                override fun getFormattedValue(value: Float): String {
+                    return "${value.toInt()}"
+                }
+            }
+        }
+
+        lineChart.apply {
+            data = LineData(lineDataSet)
+            description.isEnabled = false
+            legend.isEnabled = false
+
+            // X축 설정
+            xAxis.apply {
+                position = XAxis.XAxisPosition.BOTTOM
+                setDrawGridLines(false)
+                valueFormatter = object : ValueFormatter() {
+                    override fun getFormattedValue(value: Float): String {
+                        return "${(value + 1).toInt()}일"
+                    }
+                }
+                granularity = 1f
+            }
+
+            // Y축 설정
+            axisLeft.apply {
+                axisMinimum = 0f
+                setDrawGridLines(true)
+                valueFormatter = object : ValueFormatter() {
+                    override fun getFormattedValue(value: Float): String {
+                        return "${value.toInt()}만원"
+                    }
+                }
+            }
+            axisRight.isEnabled = false
+
+            animateX(1000)
         }
     }
 
