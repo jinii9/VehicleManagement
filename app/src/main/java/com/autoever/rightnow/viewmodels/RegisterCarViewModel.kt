@@ -11,10 +11,4 @@ class RegisterCarViewModel : ViewModel() {
     var year: Int = 2024
     var image: String = ""
 
-    var carNumber: String = ""
-    var pricePerHour: Number = 0
-    var carDescription: String = ""
-    var carLocationLat: String = ""
-    var carLocationLong: String = ""
-
 }
