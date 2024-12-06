@@ -1,6 +1,7 @@
 package com.autoever.rightnow.fragments
 
 import android.Manifest
+import android.content.Intent
 import android.os.Bundle
 import android.util.Log
 import android.view.LayoutInflater
@@ -15,6 +16,7 @@ import androidx.recyclerview.widget.RecyclerView
 //import com.autoever.rightnow.KAKAO_MAP_KEY
 //import com.autoever.rightnow.NAVER_MAP_KEY
 import com.autoever.rightnow.R
+import com.autoever.rightnow.activities.CarDetailActivity
 import com.autoever.rightnow.databinding.FragmentFindBinding
 import com.autoever.rightnow.models.Car
 import com.google.firebase.firestore.FirebaseFirestore
@@ -30,8 +32,8 @@ class FindFragment : Fragment() {
 
     val cars = mutableListOf<Car>()
 
-    private lateinit var recyclerView: RecyclerView
-    private lateinit var carAdapter: CarAdapter
+//    private lateinit var recyclerView: RecyclerView
+//    private lateinit var carAdapter: CarAdapter
 
     private lateinit var naverMap: NaverMap
     private lateinit var locationSource: FusedLocationSource
@@ -48,8 +50,6 @@ class FindFragment : Fragment() {
 //        recyclerView.layoutManager = LinearLayoutManager(context)
 //        carAdapter = CarAdapter(cars)
 //        recyclerView.adapter = carAdapter
-//
-//        getCars
 
         locationPermissionRequest.launch(arrayOf(
             Manifest.permission.ACCESS_FINE_LOCATION,
@@ -67,6 +67,8 @@ class FindFragment : Fragment() {
             this.naverMap = naverMap // naverMap 초기화
             naverMap.locationSource = locationSource
             naverMap.locationTrackingMode = LocationTrackingMode.Follow
+
+            getCars()
         }
         return view
     }
@@ -88,45 +90,66 @@ class FindFragment : Fragment() {
     }
 
     fun getCars() {
-        cars.clear()
+        cars.clear() // 기존 데이터 초기화
         firestore.collection("cars")
-            .get() // get() 메서드를 사용하여 데이터를 가져옴
+            .get()
             .addOnSuccessListener { result ->
-                // 가져온 결과를 반복문으로 처리
                 for (document in result) {
-                    val car = document.toObject(Car::class.java) // 각 문서를 User 객체로 변환
+                    val car = document.toObject(Car::class.java)
                     cars.add(car)
+
+                    // 지도에 마커 추가
+                    if (::naverMap.isInitialized) {
+                        addMarker(car)
+                    }
                 }
-                carAdapter.notifyDataSetChanged()
             }
             .addOnFailureListener { exception ->
-                // 실패했을 때 처리
-                println("Error getting documents: $exception")
+                Log.e("FindFragment", "Error getting documents: $exception")
             }
+
+        Log.d("차들 개수",cars.toString())
+    }
+
+    private fun addMarker(car: Car) {
+        Log.d("자동차 자동차", car.toString())
+        val marker = com.naver.maps.map.overlay.Marker()
+        marker.position = com.naver.maps.geometry.LatLng(car.carLocationLat.toDouble(), car.carLocationLong.toDouble())
+        marker.map = naverMap
+//        marker.captionText = car.carType // 마커 위에 이름 표시
+
+
+        marker.setOnClickListener {
+            val intent = Intent(requireContext(), CarDetailActivity::class.java).apply {
+                putExtra("car", car) // Car 객체 전달
+            }
+            startActivity(intent)
+            true
+        }
     }
 }
 
-class CarAdapter(private val cars: List<Car>) : RecyclerView.Adapter<CarAdapter.CarViewHolder>() {
-
-    // ViewHolder 정의
-    class CarViewHolder(view: View) : RecyclerView.ViewHolder(view) {
-        val carName: TextView = view.findViewById(R.id.textView)
-    }
-
-    // onCreateViewHolder: 아이템 레이아웃을 뷰로 변환
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): CarViewHolder {
-        val view = LayoutInflater.from(parent.context).inflate(R.layout.item_car, parent, false)
-        return CarViewHolder(view)
-    }
-
-    // onBindViewHolder: 데이터를 뷰에 바인딩
-    override fun onBindViewHolder(holder: CarViewHolder, position: Int) {
-        val car = cars[position]
+//class CarAdapter(private val cars: List<Car>) : RecyclerView.Adapter<CarAdapter.CarViewHolder>() {
+//
+//    // ViewHolder 정의
+//    class CarViewHolder(view: View) : RecyclerView.ViewHolder(view) {
+//        val carName: TextView = view.findViewById(R.id.textView)
+//    }
+//
+//    // onCreateViewHolder: 아이템 레이아웃을 뷰로 변환
+//    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): CarViewHolder {
+//        val view = LayoutInflater.from(parent.context).inflate(R.layout.item_car, parent, false)
+//        return CarViewHolder(view)
+//    }
+//
+//    // onBindViewHolder: 데이터를 뷰에 바인딩
+//    override fun onBindViewHolder(holder: CarViewHolder, position: Int) {
+//        val car = cars[position]
 //        holder.carName.text = car.name
-    }
-
-    // getItemCount: 아이템의 개수 반환
-    override fun getItemCount(): Int {
-        return cars.size
-    }
-}
+//    }
+//
+//    // getItemCount: 아이템의 개수 반환
+//    override fun getItemCount(): Int {
+//        return cars.size
+//    }
+//}
