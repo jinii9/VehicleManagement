@@ -1,42 +1,49 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical"
     android:padding="16dp">
 
     <LinearLayout
-        android:layout_width="match_parent"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:orientation="vertical">
+        android:orientation="vertical"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent">
+
 
         <TextView
-            android:id="@+id/textView"
+            android:id="@+id/tvWelcome"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="차량 별칭" />
+            android:text="차량을 등록하고\n다양한 디지털 서비스를 경험하세요."
+            android:textSize="24sp"
+            android:textStyle="bold"
+            android:gravity="center"
+            android:layout_marginBottom="16dp" />
 
-        <EditText
-            android:id="@+id/editTextName"
+        <!-- 이미지 -->
+        <ImageView
+            android:id="@+id/emptycarImage"
             android:layout_width="match_parent"
-            android:layout_height="50dp"
-            android:layout_marginTop="8dp"
-            android:background="@drawable/edittext_background"
-            android:ems="10"
-            android:inputType="text" />
-    </LinearLayout>
+            android:layout_height="wrap_content"
+            app:srcCompat="@drawable/emptycar"
+            app:layout_constraintBottom_toTopOf="@id/registerCarButton"
+            android:layout_marginBottom="16dp" />
 
-    <Space
-        android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:layout_weight="1" />
+    </LinearLayout>t
+    <!-- 하단 버튼 -->
+    <Button
+        android:id="@+id/registerCarButton"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:text="등록하기"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent" />
 
-    <com.google.android.material.button.MaterialButton
-        android:id="@+id/button"
-        android:layout_width="match_parent"
-        android:layout_height="60dp"
-        android:text="등록"
-        app:cornerRadius="8dp" />
-</LinearLayout>
+</androidx.constraintlayout.widget.ConstraintLayout>
