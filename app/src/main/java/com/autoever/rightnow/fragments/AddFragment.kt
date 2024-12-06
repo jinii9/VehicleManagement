@@ -45,7 +45,7 @@ class AddFragment : Fragment() {
     fun addCar() {
         val carName = editTextName.text.toString()
         if (carName.isNotEmpty()) {
-            val car = Car(name = carName)
+            val car = Car(carType = carName)
 
             firestore.collection("cars")
                 .add(car)
