@@ -20,7 +20,29 @@
         android:id="@+id/addFragment"
         android:name="com.autoever.rightnow.fragments.AddFragment"
         android:label="차량등록"
-        tools:layout="@layout/fragment_add" />
+        tools:layout="@layout/fragment_add">
+
+        <action
+            android:id="@+id/action_fragment_add_to_fragment_register_car1"
+            app:destination="@id/fragment_register_car1"
+            app:popUpTo="@id/addFragment"
+            app:popUpToInclusive="true" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/fragment_register_car1"
+        android:name="com.autoever.rightnow.fragments.RegisterCar1Fragment"
+        android:label="차량 등록 1단계 화면" >
+
+        <action
+            android:id="@+id/action_fragment_register_car1_to_fragment_register_car2"
+            app:destination="@id/fragment_register_car2" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/fragment_register_car2"
+        android:name="com.autoever.rightnow.fragments.RegisterCar2Fragment"
+        android:label="차량 등록 2단계 화면" />
 
     <fragment
         android:id="@+id/myFragment"
