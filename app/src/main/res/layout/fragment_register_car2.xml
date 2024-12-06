@@ -54,20 +54,24 @@
             android:layout_height="29dp"
             android:text="차량 위치" />
 
-        <Button
+        <android.widget.Button
             android:id="@+id/currentPosButton"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="현재 위치 가져오기" />
+            android:text="현재 위치 가져오기"
+            android:background="@drawable/primary_button"
+            android:textColor="@color/white"/>
 
 
     </LinearLayout>
 
-    <Button
+    <android.widget.Button
         android:id="@+id/RegisterButton"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
+        android:background="@drawable/primary_button"
+        android:textColor="@color/white"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:text="등록하기" />

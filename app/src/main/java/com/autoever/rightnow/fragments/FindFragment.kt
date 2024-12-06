@@ -122,7 +122,7 @@ class CarAdapter(private val cars: List<Car>) : RecyclerView.Adapter<CarAdapter.
     // onBindViewHolder: 데이터를 뷰에 바인딩
     override fun onBindViewHolder(holder: CarViewHolder, position: Int) {
         val car = cars[position]
-        holder.carName.text = car.name
+//        holder.carName.text = car.name
     }
 
     // getItemCount: 아이템의 개수 반환
