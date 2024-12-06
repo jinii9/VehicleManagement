@@ -2,22 +2,22 @@
 <layer-list xmlns:android="http://schemas.android.com/apk/res/android">
 
     <!-- 그림자 레이어 -->
-    <item>
-        <shape android:shape="rectangle">
-            <!-- 그림자 색상 -->
-            <solid android:color="#80000000" /> <!-- 투명한 검정색 (#80은 투명도 50%) -->
+<!--    <item>-->
+<!--        <shape android:shape="rectangle">-->
+<!--            &lt;!&ndash; 그림자 색상 &ndash;&gt;-->
+<!--            <solid android:color="#40000000" /> &lt;!&ndash; 투명한 검정색 (#80은 투명도 50%) &ndash;&gt;-->
 
-            <!-- 그림자 크기 -->
-            <corners android:radius="16dp" />
+<!--            &lt;!&ndash; 그림자 크기 &ndash;&gt;-->
+<!--            <corners android:radius="8dp" />-->
 
-            <!-- 그림자 위치 -->
-            <padding
-                android:left="2dp"
-                android:top="2dp"
-                android:right="2dp"
-                android:bottom="2dp" />
-        </shape>
-    </item>
+<!--            &lt;!&ndash; 그림자 위치 &ndash;&gt;-->
+<!--            <padding-->
+<!--                android:left="0dp"-->
+<!--                android:top="0dp"-->
+<!--                android:right="0dp"-->
+<!--                android:bottom="2dp" />-->
+<!--        </shape>-->
+<!--    </item>-->
 
     <!-- 실제 배경 레이어 -->
     <item>
