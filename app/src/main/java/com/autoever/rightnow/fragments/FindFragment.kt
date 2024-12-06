@@ -1,18 +1,29 @@
 package com.autoever.rightnow.fragments
 
+import android.Manifest
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
+import android.widget.Toast
+import androidx.activity.result.contract.ActivityResultContracts
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-import com.autoever.rightnow.KAKAO_MAP_KEY
+//import com.autoever.rightnow.KAKAO_MAP_KEY
+//import com.autoever.rightnow.NAVER_MAP_KEY
 import com.autoever.rightnow.R
+import com.autoever.rightnow.databinding.FragmentFindBinding
 import com.autoever.rightnow.models.Car
 import com.google.firebase.firestore.FirebaseFirestore
-import com.kakao.vectormap.KakaoMapSdk
+import com.naver.maps.map.LocationTrackingMode
+import com.naver.maps.map.MapFragment
+import com.naver.maps.map.NaverMap
+import com.naver.maps.map.NaverMapSdk
+import com.naver.maps.map.util.FusedLocationSource
+
 
 class FindFragment : Fragment() {
     val firestore = FirebaseFirestore.getInstance()
@@ -21,6 +32,10 @@ class FindFragment : Fragment() {
 
     private lateinit var recyclerView: RecyclerView
     private lateinit var carAdapter: CarAdapter
+
+    private lateinit var naverMap: NaverMap
+    private lateinit var locationSource: FusedLocationSource
+    private val LOCATION_PERMISSION_REQUEST_CODE = 1000
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -34,19 +49,43 @@ class FindFragment : Fragment() {
 //        carAdapter = CarAdapter(cars)
 //        recyclerView.adapter = carAdapter
 //
-//        getCars()
+//        getCars
 
+        locationPermissionRequest.launch(arrayOf(
+            Manifest.permission.ACCESS_FINE_LOCATION,
+            Manifest.permission.ACCESS_COARSE_LOCATION))
+
+        locationSource = FusedLocationSource(this, LOCATION_PERMISSION_REQUEST_CODE)
+
+        val mapFragment = childFragmentManager.findFragmentById(R.id.map_fragment) as MapFragment?
+            ?: MapFragment.newInstance().also {
+                childFragmentManager.beginTransaction().add(R.id.map_fragment, it).commit()
+            }
+
+        // 네이버 지도 객체 가져오기
+        mapFragment.getMapAsync { naverMap ->
+            this.naverMap = naverMap // naverMap 초기화
+            naverMap.locationSource = locationSource
+            naverMap.locationTrackingMode = LocationTrackingMode.Follow
+        }
         return view
     }
-    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        super.onViewCreated(view, savedInstanceState)
 
-        showMapView()
+    private val locationPermissionRequest = registerForActivityResult(
+        ActivityResultContracts.RequestMultiplePermissions()
+    ) { permissions ->
+        when {
+            permissions.getOrDefault(Manifest.permission.ACCESS_FINE_LOCATION, false) -> {
+                // Precise location access granted.
+            }
+            permissions.getOrDefault(Manifest.permission.ACCESS_COARSE_LOCATION, false) -> {
+                // Only approximate location access granted.
+            } else -> {
+            // No location access granted
+            Toast.makeText(requireContext(), "위치 권한을 허용해주세요.", Toast.LENGTH_SHORT)
+        }
+        }
     }
-    private fun showMapView() {
-        KakaoMapSdk.init(requireContext(), KAKAO_MAP_KEY)
-    }
-
 
     fun getCars() {
         cars.clear()

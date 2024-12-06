@@ -102,7 +102,6 @@
                     android:text="반납하기"
                     android:textColor="@color/white"
                     android:textStyle="bold" />
-
             </LinearLayout>
 
             <LinearLayout
@@ -193,8 +192,22 @@
                     android:background="@drawable/primary_button"
                     android:gravity="center"
                     android:text="끄기"
+                    android:elevation="4dp"
                     android:textColor="@color/white"
                     android:textStyle="bold" />
+
+                <TextView
+                    android:id="@+id/btnSignup"
+                    android:layout_width="match_parent"
+                    android:layout_height="0dp"
+                    android:layout_marginStart="16dp"
+                    android:layout_marginEnd="16dp"
+                    android:layout_marginBottom="16dp"
+                    android:background="@drawable/secondary_button"
+                    android:gravity="center"
+                    android:elevation="4dp"
+                    android:text="회원가입"
+                    android:textColor="#020202" />
 
             </LinearLayout>
 

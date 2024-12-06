@@ -15,4 +15,13 @@
         android:textColor="#334155"
         android:textSize="22sp"
         android:textStyle="bold" />
+
+    <androidx.fragment.app.FragmentContainerView
+        android:id="@+id/map_fragment"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:name="com.naver.maps.map.MapFragment"
+        android:layout_margin="16dp"/>
+
+
 </LinearLayout>
