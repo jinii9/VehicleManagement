@@ -8,9 +8,11 @@ import android.widget.TextView
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.autoever.rightnow.KAKAO_MAP_KEY
 import com.autoever.rightnow.R
 import com.autoever.rightnow.models.Car
 import com.google.firebase.firestore.FirebaseFirestore
+import com.kakao.vectormap.KakaoMapSdk
 
 class FindFragment : Fragment() {
     val firestore = FirebaseFirestore.getInstance()
@@ -27,15 +29,24 @@ class FindFragment : Fragment() {
     ): View? {
         val view = inflater.inflate(R.layout.fragment_find, container, false)
 
-        recyclerView = view.findViewById(R.id.recyclerView)
-        recyclerView.layoutManager = LinearLayoutManager(context)
-        carAdapter = CarAdapter(cars)
-        recyclerView.adapter = carAdapter
-
-        getCars()
+//        recyclerView = view.findViewById(R.id.recyclerView)
+//        recyclerView.layoutManager = LinearLayoutManager(context)
+//        carAdapter = CarAdapter(cars)
+//        recyclerView.adapter = carAdapter
+//
+//        getCars()
 
         return view
     }
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+
+        showMapView()
+    }
+    private fun showMapView() {
+        KakaoMapSdk.init(requireContext(), KAKAO_MAP_KEY)
+    }
+
 
     fun getCars() {
         cars.clear()
