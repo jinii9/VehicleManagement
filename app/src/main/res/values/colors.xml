@@ -4,5 +4,11 @@
     <color name="white">#FFFFFFFF</color>
     <color name="gray">#F5F5F5</color>
     <color name="primary">#01AF56</color>
+    <color name="dark_gray">#AAAAAA</color>
 
+    <color name="color1">#61D835</color>
+    <color name="color2">#007B75</color>
+    <color name="color3">#1FB100</color>
+    <color name="color4">#16E7CF</color>
+    <color name="color5">#007100</color>
 </resources>
