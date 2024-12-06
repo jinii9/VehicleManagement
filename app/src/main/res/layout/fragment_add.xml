@@ -26,7 +26,6 @@
             android:gravity="center"
             android:layout_marginBottom="16dp" />
 
-        <!-- 이미지 -->
         <ImageView
             android:id="@+id/emptycarImage"
             android:layout_width="match_parent"
@@ -35,8 +34,7 @@
             app:layout_constraintBottom_toTopOf="@id/registerCarButton"
             android:layout_marginBottom="16dp" />
 
-    </LinearLayout>t
-    <!-- 하단 버튼 -->
+    </LinearLayout>
     <Button
         android:id="@+id/registerCarButton"
         android:layout_width="0dp"
