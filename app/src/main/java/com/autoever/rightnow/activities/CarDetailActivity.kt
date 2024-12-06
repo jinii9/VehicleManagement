@@ -54,11 +54,11 @@ class CarDetailActivity : AppCompatActivity() {
             textViewpricePerHour.text = it.pricePerHour.toString() + "원"
             // 이미지 로드 (Glide 사용)
 
-            val imageUri = Uri.parse(it.image) // String을 URI로 변환
-            imageView.setImageURI(imageUri)
+//            val imageUri = Uri.parse(it.image) // String을 URI로 변환
+//            imageView.setImageURI(imageUri)
             Glide.with(this)
-                .load(it.image)
-//                .placeholder(R.drawable.placeholder_image) // 기본 이미지
+//                .load(it.image)
+                .load(R.drawable.car_sample) // 기본 이미지
                 .into(imageView)
 
             val mapFragment = supportFragmentManager.findFragmentById(R.id.map_fragment) as MapFragment?
@@ -87,9 +87,9 @@ class CarDetailActivity : AppCompatActivity() {
             }
         } ?: Log.e("CarDetailActivity", "Car object is null")
 
-//        btnUse.setOnClickListener {
-//            val intent = Intent(this, BookActivity::class.java)
-//            startActivity(intent)
-//        }
+        btnUse.setOnClickListener {
+            val intent = Intent(this, BookActivity::class.java)
+            startActivity(intent)
+        }
     }
 }
