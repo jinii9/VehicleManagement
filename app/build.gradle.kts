@@ -96,4 +96,8 @@ dependencies {
 
     // number picker
     implementation ("com.github.travijuu:numberpicker:1.0.7")
+
+    // 카메라
+    implementation ("com.github.bumptech.glide:glide:4.12.0")
+
 }

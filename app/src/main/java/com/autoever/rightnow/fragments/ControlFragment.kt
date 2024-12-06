@@ -1,5 +1,6 @@
 package com.autoever.rightnow.fragments
 
+import android.content.Intent
 import android.graphics.Color
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -12,6 +13,7 @@ import android.widget.TextView
 import android.widget.Toast
 import androidx.fragment.app.Fragment
 import com.autoever.rightnow.R
+import com.autoever.rightnow.activities.BookActivity
 
 import com.google.firebase.firestore.FirebaseFirestore
 
@@ -41,9 +43,17 @@ class ControlFragment : Fragment() {
         val btnOff = view.findViewById<TextView>(R.id.btnOff)
         val temperatureLayout = view.findViewById<LinearLayout>(R.id.temperatureLayout)
 
-
+//        //////////////////////////////////////////////////
+//        // testBtn 추가
+//        val testBtn = view.findViewById<TextView>(R.id.testBtn)
+//        // testBtn 클릭 리스너 추가
+//        testBtn.setOnClickListener {
+//            val intent = Intent(activity, BookActivity::class.java)
+//            startActivity(intent)
+//        }
+//        //////////////////////////////////////////////////
         // 현재 로그인된 사용자의 차량 ID
-        val carId = "dNI86Olv5gZ1tLauLBT5"
+        val carId = "EeKNwezVJpnkhYW8ufDd"
 
         // 초기 전원 상태 확인 및 UI 업데이트
         firestore.collection("remoteControl").document(carId)
