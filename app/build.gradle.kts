@@ -24,7 +24,6 @@ android {
 
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
         //추가
-        buildConfigField("String", "KAKAO_MAP_KEY", properties.getProperty("KAKAO_MAP_KEY"))
         buildConfigField("String", "NAVER_MAP_KEY", properties.getProperty("NAVER_MAP_KEY"))
         ndk {
             abiFilters.add("arm64-v8a")
@@ -87,7 +86,6 @@ dependencies {
     // Pie Chart
     implementation("com.github.PhilJay:MPAndroidChart:v3.1.0")
 
-}
 
     // 카카오 지도
     implementation ("com.kakao.maps.open:android:2.9.5")
@@ -96,8 +94,6 @@ dependencies {
     implementation("com.naver.maps:map-sdk:3.20.0")
     implementation ("com.google.android.gms:play-services-location:21.0.1")
 
-
-}
     // number picker
     implementation ("com.github.travijuu:numberpicker:1.0.7")
 }
