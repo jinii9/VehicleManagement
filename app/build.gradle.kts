@@ -94,6 +94,10 @@ dependencies {
     implementation("com.naver.maps:map-sdk:3.20.0")
     implementation ("com.google.android.gms:play-services-location:21.0.1")
 
+    // 글라이드
+    implementation("com.github.bumptech.glide:glide:4.15.1")
+    annotationProcessor("com.github.bumptech.glide:compiler:4.15.1")
+
     // number picker
     implementation ("com.github.travijuu:numberpicker:1.0.7")
 
